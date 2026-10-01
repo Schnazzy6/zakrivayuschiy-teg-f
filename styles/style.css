@@ -1,16 +1,359 @@
-/* Здесь вы напишете основную часть стилей страницы.
-
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
-
-*/
-
 .page {
-  min-inline-size: 320px;
   min-block-size: 100dvb;
+  font-variation-settings: 'wght' var(--main-card-font-weight, 400);
+  font-family: var(--main-font, "Inter"), sans-serif;
+  background-attachment: fixed;
+  background-image: var(--body-gradient);
+  background-color: white;
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  background-color: white;
+  font-family: var(--accent-font, "PressStart2P"), monospace;
+  margin: 100px auto;
+  inline-size: min(100%, 700px);
+  min-block-size: 368px;
+  padding: 30px 12px;
+}
+
+.header-logo {
+  font-size: clamp(2.65rem, 12.45vw, 3.875rem);
+}
+
+.header-title {
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+  text-transform: uppercase;
+}
+
+.main {
+  display: grid;
+  justify-items: center;
+  gap: 50px;
+}
+
+.card {
+  inline-size: min(100%, 700px);
+  border: 2px solid black;
+  background-color: white;
+}
+
+.card-title {
+  font-variation-settings: 'wght' var(--card-title-font-weight, 700);
+  font-size: 18px;
+  margin: 5px 10px;
+}
+
+.card__image-container {
+  position: relative;
+  border-block: 2px solid black;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.card__logo {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 25px;
+  inset-inline-end: 25px;
+  text-shadow: -1px 0 white, 1px 0 white, 0 -1px white, 0  1px white;
+  opacity: 0.5;
+  mix-blend-mode: hard-light;
+  font-family: var(--accent-font, "PressStart2P"), monospace;
+  font-size: 14px;
+}
+
+@supports ((text-stroke: 1px white) or (-webkit-text-stroke: 1px white)) {
+  .card__logo {
+    -webkit-text-stroke: 1px white;
+    text-stroke: 1px white;
+    text-shadow: none;
+  }
+}
+
+.card__image {
+  object-fit: cover;
+  object-position: right;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.second-image {
+  filter: grayscale(0.5);
+}
+
+.third-image {
+  filter: saturate(4.5);
+}
+
+.fourth-image {
+  filter: hue-rotate(50deg);
+}
+
+.fifth-image {
+  filter: invert(1) brightness(0.9);
+}
+
+.sixth-image {
+  filter: sepia(1);
+}
+
+.seventh-image {
+  filter: blur(5px);
+}
+
+.eighth-image {
+  filter: hue-rotate(90deg) opacity(0.7) blur(2px);
+}
+
+.card__description {
+  padding: 26px 25px 0;
+  font-size: 18px;
+  line-height: 1.17;
+}
+
+.card__description p:first-child {
+  margin-block-end: 27px;
+}
+
+.card__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+  padding: 25px;
+}
+
+.card__like-button {
+  inline-size: 130px;
+  block-size: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 2px solid black;
+  cursor: pointer;
+  font-family: var(--accent-font, "PressStart2P"), monospace;
+  font-size: 14px;
+  line-height: 0.9;
+}
+
+.card__icon-button {
+  inline-size: 39px;
+  block-size: 39px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  transition: outline-color 0.3s ease;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-block: 50px 103px;
+}
+
+.button-save {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid black;
+  padding: 15px 20px 15px 20px;
+  cursor: pointer;
+}
+
+.button__text {
+  font-family: var(--accent-font, "PressStart2P"), monospace;
+  font-size: 14px;
+  line-height: 0.9;
+}
+
+.popup[open] {
+  margin: auto;
+  display: grid;
+  gap: 30px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  inline-size: min(353px, calc(100vw - 38px));
+  padding: 26px 30px;
+  font-family: var(--accent-font, "PressStart2P"), monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.popup[open]::backdrop {
+  background-color: black;
+  opacity: 0.75;
+}
+
+.popup__content {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.popup__icon {
+  flex: none;
+}
+
+.popup__text {
+  max-inline-size: 220px;
+}
+
+.popup__close-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  inline-size: 100%;
+  background-color: white;
+  cursor: pointer;
+}
+
+.popup__button-container .button__text {
+  line-height: 0.9;
+  padding-block: 12.5px;
+}
+
+@media (width <= 600px) {
+  .header {
+    min-block-size: 327px;
+  }
+
+  .card__logo {
+    inset-block-start: 23px;
+    inset-inline-end: 10px;
+  }
+
+  .card-title {
+    margin: 4px 10px 6px;
+  }
+
+  .footer {
+    margin-block: 52px 100px;
+  }
+
+  .button-save {
+    flex-direction: column;
+  }
+
+  .save-icon {
+    inline-size: 28px;
+    block-size: 28px;
+  }
+
+  .popup[open] {
+    padding: 26px clamp(20px, 6vw, 42px);
+  }
+}
+
+.card__like-button,
+.button-save,
+.popup__close-button {
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+.card__like-button::before,
+.button-save::before,
+.popup__close-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-in-out;
+}
+
+.card__like-button:hover::before,
+.button-save:hover::before,
+.popup__close-button:hover::before {
+  transform: scaleX(1);
+}
+
+.card__like-button:focus-visible,
+.button-save:focus-visible,
+.popup__close-button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  box-shadow: 2px 2px var(--accent-color);
+}
+
+.button__text,
+.save-icon {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+.save-icon {
+  color: #fff;
+}
+
+.card__icon-button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.like-icon .core {
+  fill: transparent;
+  transition: fill 0.3s ease 0.03s;
+}
+
+.like-icon .main-body {
+  fill: transparent;
+  transition: fill 0.3s ease;
+}
+
+.like-icon .sparks {
+  opacity: 0;
+}
+
+.like-icon .heart {
+  transform-origin: center;
+}
+
+.like-icon:hover .core {
+  fill: var(--heart-contour-color);
+  transition: fill 0.3s ease;
+}
+
+.like-icon:hover .main-body {
+  fill: var(--heart-contour-color);
+  transition: fill 0.3s ease 0.05s;
+}
+
+.like-icon:active .core,
+.like-icon:active .main-body {
+  fill: var(--heart-fill-color);
+  transition: fill 0.3s ease;
+}
+
+.like-icon.is-liked .core,
+.like-icon.is-liked .main-body {
+  fill: var(--heart-fill-color);
+  transition: fill 0.3s ease;
+}
+
+.like-icon.is-liked .contour {
+  fill: var(--heart-fill-color);
+  transition: fill 0.3s ease 0.06s;
+}
+
+.like-icon:not(.is-liked) .contour {
+  transition: fill 0.1s linear;
 }
